@@ -95,7 +95,7 @@ class UserModel extends BitrixModel
      */
     public static function freshCurrent()
     {
-        global $USER;
+        $USER = new \CUser();
 
         return static::$currentUser = (new static($USER->getId()))->load();
     }
@@ -206,7 +206,7 @@ class UserModel extends BitrixModel
             return [];
         }
 
-        global $USER;
+        $USER = new \CUser();
 
         $this->fields['GROUP_ID'] = $this->isCurrent()
             ? $USER->getUserGroupArray()
@@ -230,7 +230,7 @@ class UserModel extends BitrixModel
      */
     public function isCurrent()
     {
-        global $USER;
+        $USER = new \CUser();
 
         return $USER->getId() && $this->id == $USER->getId();
     }
@@ -254,7 +254,7 @@ class UserModel extends BitrixModel
      */
     public function isAuthorized()
     {
-        global $USER;
+        $USER = new \CUser();
 
         return ($USER->getId() == $this->id) && $USER->isAuthorized();
     }
@@ -276,7 +276,7 @@ class UserModel extends BitrixModel
      */
     public function logout()
     {
-        global $USER;
+        $USER = new \CUser();
 
         $USER->logout();
     }
